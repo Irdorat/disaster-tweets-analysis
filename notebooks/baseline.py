@@ -79,6 +79,12 @@ def _(pd):
 
 
 @app.cell
+def _(train):
+    train[train['target']==0].tail(10)
+    return
+
+
+@app.cell
 def _(
     ColumnTransformer,
     GridSearchCV,
