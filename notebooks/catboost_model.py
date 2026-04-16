@@ -308,10 +308,16 @@ def _(mo):
 @app.cell
 def _(pd):
     subm_csv = pd.read_csv('data/test_ready.csv')
-    subm_csv['keyword'] = subm_csv['keyword'].fillna('None', inplace=False)
-    subm_csv = subm_csv.dropna(subset=['text'])
     subm_csv.info()
     return (subm_csv,)
+
+
+@app.cell
+def _(subm_csv):
+    subm_csv['keyword'] = subm_csv['keyword'].fillna('None', inplace=False)
+    subm_csv['text'] = subm_csv['text'].fillna('None', inplace=False)
+    subm_csv.info()
+    return
 
 
 @app.cell
@@ -339,8 +345,8 @@ def _(subm_csv_X, subm_csv_y):
         how='left')
     subm_csv_merged = subm_csv_merged.drop('index', axis=1)
     subm_csv_merged = subm_csv_merged.drop(['keyword', 'text', 'text_len', 'word_count', 'unique_word_rate'], axis = 1)
-    subm_csv_merged.head(20)
     subm_csv_merged.to_csv('data/test_submission.csv', index=False, encoding='utf-8')
+    subm_csv_merged.info(20)
     return
 
 

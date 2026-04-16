@@ -212,5 +212,11 @@ def _(test, train_filt):
     return
 
 
+@app.cell
+def _(test):
+    test.info()
+    return
+
+
 if __name__ == "__main__":
     app.run()
